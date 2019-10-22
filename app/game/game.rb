@@ -1,14 +1,16 @@
 class Game
 
-    attr_reader :name
+    attr_accessor :name, :point_value
 
 
-    def self.start_game ### Should beginning any GAME instance
+    def start_game ### Should beginning any GAME instance
         TTY::Prompt.new
     end
 
-    def  self.winner?(prompt, user_input)
+    
 
+    def  winner?(correct_answer, user_input)
+        correct_answer == user_input
     end
 
 end

@@ -10,11 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_21_183756) do
+ActiveRecord::Schema.define(version: 2019_10_22_154503) do
 
   create_table "gamestats", force: :cascade do |t|
     t.integer "rps_score"
     t.integer "rps_times"
+    t.integer "colortext_score"
+    t.integer "colortext_times"
+    t.integer "score"
+    t.integer "times_played"
   end
 
   create_table "sessions", force: :cascade do |t|
