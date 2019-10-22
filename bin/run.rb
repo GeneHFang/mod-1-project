@@ -21,10 +21,14 @@ if sessionResult == "Logout"
     logout = true
     break
 elsif sessionResult == "Delete User"
-    delete = true
+    puts "Are you sure?(Type 'Yes' to confirm)"
+    ans = gets.chomp.upcase
+    delete = true if ans == "YES"
     break
 elsif sessionResult == "View Past Sessions"
-    on_user.formatted_sessions
+    User.formatted_sessions(on_user.id)
+    on_user.edit_comment
+
     break
 end
 #updating gamestat to DB
