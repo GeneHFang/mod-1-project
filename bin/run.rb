@@ -10,7 +10,7 @@ end
 #hash with times_game_played and score = CURRENTLY Just for RPS
 sessionResult = cli_runner
 #updating gamestat to DB
-stats_for_current_session = Gamestat.create(rps_score: sessionResult[:score], rps_times: sessionResult[:times_played])
+stats_for_current_session = Gamestat.create(sessionResult)
 #assosiating user and gamestat by session
 Session.create(user: on_user, gamestat: stats_for_current_session)
 
