@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_22_154503) do
+ActiveRecord::Schema.define(version: 2019_10_22_185439) do
 
   create_table "gamestats", force: :cascade do |t|
     t.integer "rps_score"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 2019_10_22_154503) do
   create_table "sessions", force: :cascade do |t|
     t.integer "user_id"
     t.integer "gamestat_id"
+    t.text "comment"
   end
 
   create_table "users", force: :cascade do |t|
