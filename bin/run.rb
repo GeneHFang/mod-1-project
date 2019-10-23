@@ -25,6 +25,16 @@ elsif sessionResult == "Delete User"
     ans = gets.chomp.upcase
     delete = true if ans == "YES"
     break
+elsif sessionResult == "Instructions"
+    puts "\n\nWelcome to Games2Fast2Quick.\nYou will be given 30 seconds to win as many games as possible."
+    puts "Each successful game will earn you points corresponding to the game you are playing:"
+    puts "Rock Paper Scissors : 1 point"
+    puts "Color Text : 2 points"
+    puts "Press The Key : 3 points"
+    puts "Quick Math : 2 points"
+    puts '='*70
+    puts "Good luck!\n\n"
+    break
 elsif sessionResult == "View Past Sessions"
     User.formatted_sessions(on_user.id)
     on_user.edit_comment
@@ -33,8 +43,12 @@ elsif sessionResult == "View Past Sessions"
 end
 #updating gamestat to DB
 stats_for_current_session = Gamestat.create(sessionResult)
-
-puts "\n\nTIME IS UP!!!\n"
+puts "\n"
+puts '='*70
+puts "TIME IS UP!!!"
+puts '='*70
+puts "You played #{sessionResult[:times_played]} games and scored #{sessionResult[:score]} points.
+To see your detailed session results, please select 'View Past Sessions' in the Main Menu\n\n"
 
 comment_for_session = comment_session
 #assosiating user and gamestat by session
@@ -51,7 +65,7 @@ end
 
 end
 
-binding.pry
+# binding.pry
 
 puts "HELLO WORLD"
 

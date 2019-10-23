@@ -1,6 +1,10 @@
 def game_array 
-    [Rps.new,
-   ColorText.new,PressKeyTimes.new]   
+    [
+        Rps.new,
+        ColorText.new,
+        PressKeyTimes.new,
+        QuickMath.new
+    ]   
 end
 
 def play_game

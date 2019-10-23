@@ -22,7 +22,10 @@ class ColorText < Game
         p = super
         #answer will be a SYMBOL
         answer = color_symbol_array.sample
-        puts "\nPlease select the COLOR of the following text:"
+        # puts "\nPlease select the COLOR of the following text:"
+        p.say("\nPlease select the ")
+        p.say("COLOR", color: color_symbol_array.sample)
+        p.say(" of the following text:")
         output = p.say(color_array.sample, color: answer)
         input = p.select(output, color_symbol_array)
         winner?(answer, input)

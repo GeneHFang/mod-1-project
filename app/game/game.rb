@@ -10,7 +10,15 @@ class Game
     
 
     def  winner?(correct_answer, user_input)
-        correct_answer == user_input
+        winner = (correct_answer == user_input)
+        
+        if winner
+            puts "DING DING DING" 
+        else
+            puts "WRONG"
+        end
+        
+        winner
     end
 
 end

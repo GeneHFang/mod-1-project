@@ -3,7 +3,7 @@
 def main_menu
 main_prompt = TTY::Prompt.new
 
-selection = main_prompt.select("What do you want to do?", ["Play","View Past Sessions","Logout","Delete User"])
+selection = main_prompt.select("What do you want to do?", ["Play","Instructions","View Past Sessions","Logout","Delete User"])
 end
 
 
