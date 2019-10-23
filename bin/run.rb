@@ -36,9 +36,9 @@ elsif sessionResult == "Instructions"
     puts "Good luck!\n\n"
     break
 elsif sessionResult == "View Past Sessions"
-    User.formatted_sessions(on_user.id)
-    on_user.view_session_options
-
+    continue_session_options = User.formatted_sessions(on_user.id)
+    on_user.view_session_options if continue_session_options
+    puts "="*70
     break
 end
 #updating gamestat to DB
