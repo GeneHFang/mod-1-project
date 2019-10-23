@@ -1,6 +1,6 @@
 def game_array 
     [Rps.new,
-   ColorText.new]   
+   ColorText.new,PressKeyTimes.new]   
 end
 
 def play_game
@@ -39,9 +39,7 @@ def play_game
         
         
     end
-    puts "Would you like to leave a comment on your session? (Type your comment and hit Enter. The comment can be blank.)"
-    comment = gets.chomp
-    returnHash[:comment] = comment if comment
+
     returnHash
     # Structure of return value
         #returnHash = {

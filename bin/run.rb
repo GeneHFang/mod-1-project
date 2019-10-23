@@ -33,9 +33,13 @@ elsif sessionResult == "View Past Sessions"
 end
 #updating gamestat to DB
 stats_for_current_session = Gamestat.create(sessionResult)
-#assosiating user and gamestat by session
-Session.create(user: on_user, gamestat: stats_for_current_session)
+
 puts "\n\nTIME IS UP!!!\n"
+
+comment_for_session = comment_session
+#assosiating user and gamestat by session
+Session.create(user: on_user, gamestat: stats_for_current_session, comment: comment_for_session)
+
 end
 
 next if logout
