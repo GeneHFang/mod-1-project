@@ -29,17 +29,12 @@ class Rps < Game  #Inheriting from Game class
         rpsArr.sample
     end
 
-    #determing winner - however logic change to Work for RPS
-    def winner?(prompt, u_input)
-        win_hash[prompt.to_sym] == u_input
-    end
-
     #Starts a game of rps
     def start_game
         p = super
         cpu_move = pick_rps
-        s = p.select(cpu_move, rpsArr) #Prompt Rc/Pp/Sc and wait for input
-        winner?(cpu_move,s)
+        s = p.select("Your opponent throws #{cpu_move}. You throw:", rpsArr) #Prompt Rc/Pp/Sc and wait for input
+        winner?(win_hash[cpu_move.to_sym],s)
     end
 
 end
