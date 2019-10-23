@@ -37,7 +37,7 @@ elsif sessionResult == "Instructions"
     break
 elsif sessionResult == "View Past Sessions"
     User.formatted_sessions(on_user.id)
-    on_user.edit_comment
+    on_user.view_session_options
 
     break
 end
