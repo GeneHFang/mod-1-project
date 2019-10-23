@@ -1,5 +1,6 @@
-require 'pry'
-require_relative'game'
+require_relative 'game'
+
+#Rock Paper Scissor
 
 class Rps < Game  #Inheriting from Game class 
 

@@ -1,6 +1,8 @@
 require_relative '../../config/environment'
-
 require_relative 'game'
+
+# Color Text
+
 class ColorText < Game
 
     def initialize
