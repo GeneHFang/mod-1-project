@@ -8,7 +8,7 @@ def game_array
 end
 
 def play_game
-    
+    puts "="*70
         returnHash = {}
 
         

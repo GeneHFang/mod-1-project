@@ -84,11 +84,13 @@ class User < ActiveRecord::Base
     end
 
     def edit_comment(session)
+        print_break
         p = TTY::Prompt.new
         puts "Type the new comment for session ID: #{session.id}"
         ans = gets.chomp
         Session.update(session.id, comment: ans)
-        puts "\n#{"="*70}\nComment succesfully updated"
+        print_break
+        puts "Comment succesfully updated"
     end
 
     def get_sessions_ids
@@ -97,35 +99,50 @@ class User < ActiveRecord::Base
     end
 
     def leaderboard
+        print_break
         p = TTY::Prompt.new
-        ans = p.select("Please select an option:",["Score", "Sessions played", "Main menu"])
-
-        if ans == "Score"
-            score
-        elsif ans == "Sessions played"
-            sessions_played 
-        else
-            return nil
+        
+        while true do
+            ans = p.select("Please select an option:",["Score", "Sessions played", "Main menu"])
+            if ans == "Score"
+                print_break
+                score
+            elsif ans == "Sessions played"
+                print_break
+                sessions_played 
+            elsif ans == "Main menu"
+                break
+            end
         end
+        print_break
+        return nil
     end
 
+    def go_back?(ans)
+        if ans == "Previous menu"
+            print_break
+            return true
+        end
+        false
+    end
 
     def score 
         p = TTY::Prompt.new
-        ans = p.select("Please select a score category:",["Overall","Rock Paper Scissors","QuickMath","Color Text","Press Key Times"])
-        
+        ans = p.select("Please select a score category:",["Overall","Rock Paper Scissors","QuickMath","Color Text","Press Key Times","Previous menu"])
+        return if go_back?(ans)
         print_break
-        puts "#{ans} Hi Scores"
+        puts "#{ans} High Scores"
         print_break
         i = 1
         Gamestat.order(option_hash[ans].to_sym).reverse.each { |gamestat|
 
             unless (gamestat.method(option_hash[ans]).() == nil || gamestat.users[0] == nil )
             puts "#{i}) User : #{gamestat.users[0].name} || Score : #{gamestat.method(option_hash[ans]).()}"
+            puts "-"*50
             i+=1
             end
         }
-        print_break
+        # print_break
         # binding.pry
 
         # somehash["Overall"] #=> :score
@@ -145,13 +162,11 @@ class User < ActiveRecord::Base
 
     def sessions_played
         arr = Session.group(:user_id).count.sort_by{|k,v| v}.reverse
-
-        print_break
         puts "Total Sessions Played"
         print_break
         arr.each {|array| 
             unless User.find_by(id: array[0]) == nil
-                puts "Name : #{User.find(array[0]).name} || Total sessions: #{array[1]}"
+                puts "User : #{User.find(array[0]).name} || Total sessions: #{array[1]}"
             end
         
         }
