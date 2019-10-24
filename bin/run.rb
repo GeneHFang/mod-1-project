@@ -24,18 +24,23 @@ elsif sessionResult == "Delete User"
     puts "Are you sure?(Type 'Yes' to confirm)"
     ans = gets.chomp.upcase
     delete = true if ans == "YES"
+
+    puts "\nUser successfully deleted"
     break
 elsif sessionResult == "Instructions"
-    puts "\n\nWelcome to Games2Fast2Quick.\nYou will be given 10 seconds to win as many games as possible."
+    puts '='*70
+    puts "\nWelcome to Games2Fast2Quick.\nYou will be given 10 seconds to win as many games as possible."
     puts "Each successful game will earn you points corresponding to the game you are playing:"
     puts "Rock Paper Scissors : 1 point"
     puts "Color Text : 2 points"
     puts "Press The Key : 3 points"
-    puts "Quick Math : 2 points"
+    puts "Quick Math : 2 points\n"
     puts '='*70
-    puts "Good luck!\n\n"
+    puts "Good luck!"
+    puts "="*70
     break
 elsif sessionResult == "View Past Sessions"
+    puts "="*70
     continue_session_options = User.formatted_sessions(on_user.id)
     on_user.view_session_options if continue_session_options
     puts "="*70
@@ -50,10 +55,11 @@ puts "\n"
 puts '='*70
 puts "TIME IS UP!!!"
 puts '='*70
-puts "You played #{sessionResult[:times_played]} games and scored #{sessionResult[:score]} points.
+puts "You played #{sessionResult[:times_played]} games and scored #{sessionResult[:score]} points.\n
 To see your detailed session results, please select 'View Past Sessions' in the Main Menu\n\n"
 
 comment_for_session = comment_session
+puts '='*70
 #assosiating user and gamestat by session
 Session.create(user: on_user, gamestat: stats_for_current_session, comment: comment_for_session)
 

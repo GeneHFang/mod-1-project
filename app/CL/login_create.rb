@@ -1,5 +1,10 @@
 #file in charge of login in user profile or create a new User and upload it to DB
-    
+
+    def print_break
+        puts "="*70
+    end
+
+
     #look for inputed_user in DB
     def login(username)
         User.find_by(name: username)
@@ -19,8 +24,10 @@
     #main method to login/create used at run.rb
     def login_or_create
         inicial_prompt = TTY::Prompt.new
-        inicial_selection = inicial_prompt.select("\n\nWelcome to Games2Fast2Quick:",["Login", "Create User", "Exit"])
-        
+        puts "\n"
+        print_break
+        inicial_selection = inicial_prompt.select("Welcome to Games2Fast2Quick:",["Login", "Create User", "Exit"])
+        print_break
         abort ("Ending now")if inicial_selection == "Exit"
 
         #check selection create - login
