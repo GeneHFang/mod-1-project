@@ -26,7 +26,7 @@ elsif sessionResult == "Delete User"
     delete = true if ans == "YES"
     break
 elsif sessionResult == "Instructions"
-    puts "\n\nWelcome to Games2Fast2Quick.\nYou will be given 30 seconds to win as many games as possible."
+    puts "\n\nWelcome to Games2Fast2Quick.\nYou will be given 10 seconds to win as many games as possible."
     puts "Each successful game will earn you points corresponding to the game you are playing:"
     puts "Rock Paper Scissors : 1 point"
     puts "Color Text : 2 points"
@@ -39,6 +39,9 @@ elsif sessionResult == "View Past Sessions"
     continue_session_options = User.formatted_sessions(on_user.id)
     on_user.view_session_options if continue_session_options
     puts "="*70
+    break
+elsif sessionResult == "Leaderboards"
+    on_user.leaderboard
     break
 end
 #updating gamestat to DB

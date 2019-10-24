@@ -1,3 +1,5 @@
+
+
 class User < ActiveRecord::Base
     has_many :sessions
     has_many :gamestats, through: :sessions
@@ -13,7 +15,7 @@ class User < ActiveRecord::Base
             puts "Session ID: #{session.id}\nTotal score: #{stat.score}\nGames played: #{stat.times_played}\nComment: #{session.comment}\n#{"="*70}" 
         }
         if temp.length == 0
-            puts "="*70
+            print_break
             puts "Hey #{User.find(userID).name}! You are new here come back after playing some rounds \n"
             return false
         end
@@ -94,10 +96,79 @@ class User < ActiveRecord::Base
         self.sessions.pluck(:id)
     end
 
-    def leadboard
-        p = TTY:Prompt.new
-        ans = p.select{}
+    def leaderboard
+        p = TTY::Prompt.new
+        ans = p.select("Please select an option:",["Score", "Sessions played", "Main menu"])
+
+        if ans == "Score"
+            score
+        elsif ans == "Sessions played"
+            sessions_played 
+        else
+            return nil
+        end
     end
+
+
+    def score 
+        p = TTY::Prompt.new
+        ans = p.select("Please select a score category:",["Overall","Rock Paper Scissors","QuickMath","Color Text","Press Key Times"])
+        
+        print_break
+        puts "#{ans} Hi Scores"
+        print_break
+        i = 1
+        Gamestat.order(option_hash[ans].to_sym).reverse.each { |gamestat|
+
+            unless (gamestat.method(option_hash[ans]).() == nil || gamestat.users[0] == nil )
+            puts "#{i}) User : #{gamestat.users[0].name} || Score : #{gamestat.method(option_hash[ans]).()}"
+            i+=1
+            end
+        }
+        print_break
+        # binding.pry
+
+        # somehash["Overall"] #=> :score
+        # somehash["Color Text"] #=> :colortext_score
+    end
+
+    def option_hash
+        hash = { 
+            "Overall" => "score",
+            "Rock Paper Scissors" => "rps_score",
+            "QuickMath" => "quickmath_score",
+            "Color Text" => "colortext_score",
+            "Press Key Times"=> "presskeytimes_score"
+        }
+    end
+
+
+    def sessions_played
+        arr = Session.group(:user_id).count.sort_by{|k,v| v}.reverse
+
+        print_break
+        puts "Total Sessions Played"
+        print_break
+        arr.each {|array| 
+            unless User.find_by(id: array[0]) == nil
+                puts "Name : #{User.find(array[0]).name} || Total sessions: #{array[1]}"
+            end
+        
+        }
+        print_break
+    end
+
+
+    #Gamestat.order(score: :desc)[0].score
+       #Gamestat.order(score: :desc)[0].users[0].name
+       #Session.group(:user_id).count.sort_by{|k,v| v}.reverse
+       # -> [[user_id,total#sessions],[]]
+       #[[user_id,total#sessions],[]].each{|array| puts “#{User.find(array[0]).name} || total sessions: #{array[1]}“}
+
+
+    # def self.scores
+    # end
+
  
 end
 

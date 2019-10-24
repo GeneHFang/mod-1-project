@@ -19,7 +19,7 @@
     #main method to login/create used at run.rb
     def login_or_create
         inicial_prompt = TTY::Prompt.new
-        inicial_selection = inicial_prompt.select("Welcome:",["Login", "Create User", "Exit"])
+        inicial_selection = inicial_prompt.select("\n\nWelcome to Games2Fast2Quick:",["Login", "Create User", "Exit"])
         
         abort ("Ending now")if inicial_selection == "Exit"
 
