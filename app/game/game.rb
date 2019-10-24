@@ -13,9 +13,11 @@ class Game
         winner = (correct_answer == user_input)
         
         if winner
-            puts "DING DING DING" 
+            puts "DING DING DING"
+            `say "ding ding ding"` 
         else
             puts "WRONG"
+            `say "Get good loser"`
         end
         
         winner
