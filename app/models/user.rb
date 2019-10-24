@@ -47,15 +47,15 @@ class User < ActiveRecord::Base
 
         while true do
 
-            action_for_session= p.select("What would you like to do with this session?",["edit session comment(s)","view individual stats","view comment(s)","main menu"])
+            action_for_session= p.select("What would you like to do with this session?",["Edit session comment","View individual stats","View comment","Main menu"])
             
-            break if action_for_session == "main menu"
+            break if action_for_session == "Main menu"
             
-            if action_for_session == "edit session comment(s)"
+            if action_for_session == "Edit session comment"
                 edit_comment(specific_session) 
-            elsif action_for_session == "view individual stats"
+            elsif action_for_session == "View individual stats"
                 display_ind_stats(specific_session)
-            elsif action_for_session == "view comment(s)"
+            elsif action_for_session == "View comment"
                 display_comment(specific_session)
             end
             print_break
@@ -93,5 +93,11 @@ class User < ActiveRecord::Base
         #self.sessions.map{|session| session.id} "Pluck" direct method on ActiveRecord
         self.sessions.pluck(:id)
     end
+
+    def leadboard
+        p = TTY:Prompt.new
+        ans = p.select{}
+    end
  
 end
+
