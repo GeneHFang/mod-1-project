@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
             puts "Session ID: #{session.id}\nTotal score: #{stat.score}\nGames played: #{stat.times_played}\nComment: #{session.comment}\n#{"="*70}" 
         }
         if temp.length == 0
-            print_break
+            puts '='*70
             puts "Hey #{User.find(userID).name}! You are new here come back after playing some rounds \n"
             return false
         end
